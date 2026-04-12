@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    lefthook-lint:
+      run: |
+        ruff format --force-exclude .
