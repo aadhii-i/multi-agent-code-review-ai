@@ -1,2 +1,3 @@
 - fix off-by-one @ 2026-03-05T19:18:21+05:30
 - comment clarification @ 2026-05-21T12:00:49+05:30
+- improve error handling @ 2026-06-08T20:46:46+05:30
