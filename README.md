@@ -95,6 +95,28 @@ docker run -p 8000:8000 --env-file .env marc-ai:prod
 -   `POST /api/v1/review/analyze` — Trigger code analysis
 -   `GET /api/v1/review/status/{run_id}` — Check analysis status
 -   `GET /api/v1/review/report/{run_id}` — Retrieve analysis report
+-   `POST /api/v1/webhooks/github` — GitHub PR webhook (auto-triggers a scoped analysis on `opened`/`synchronize` and posts results back to the PR)
+
+## GitHub Integration
+
+Instead of calling `/api/v1/review/analyze` manually, MARC-AI can review pull requests automatically via a GitHub webhook.
+
+### Setup
+
+1. **Register the webhook** — in your repo, go to *Settings → Webhooks → Add webhook*:
+    -   Payload URL: `https://<your-marc-ai-host>/api/v1/webhooks/github`
+    -   Content type: `application/json`
+    -   Secret: a random string — set the same value as `GITHUB_WEBHOOK_SECRET` in MARC-AI's `.env`
+    -   Events: select **Pull requests** only
+2. **Generate a token** MARC-AI can use to call the GitHub API back — a classic PAT with the `repo` scope (or a GitHub App installation token with `pull_requests: read & write` and `contents: read` permissions) — and set it as `GITHUB_TOKEN`.
+3. Set both in `.env` (see `.env.example`).
+
+### What happens on a PR
+
+-   `opened` and `synchronize` (new commits pushed) trigger a run; every other event/action is acknowledged and ignored.
+-   Only the PR's changed files are analyzed (filtered to the extensions the existing agents understand: `.py`, `.js`, `.jsx`, `.ts`, `.tsx`), via the same LangGraph workflow used by `/api/v1/review/analyze` — no separate analysis path.
+-   The consolidated result is posted back as a single PR review comment. Re-delivering a webhook for a PR/commit that's already been analyzed returns the cached result instead of re-running.
+-   Inline, per-finding comments (option (b) in the design) are not implemented yet — see the `TODO` in `app/services/github_service.py::post_summary_comment`.
 
 ## Project Structure
 

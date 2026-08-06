@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 
 from app.core.config import settings
-from app.routers import code_review
+from app.routers import code_review, webhooks
 
 app = FastAPI(
     title="MARC-AI Multi-Agent Code Review",
@@ -14,6 +14,7 @@ app = FastAPI(
 )
 
 app.include_router(code_review.router, prefix="/api/v1/review", tags=["Review"])
+app.include_router(webhooks.router, prefix="/api/v1/webhooks", tags=["Webhooks"])
 
 
 @app.get("/health", tags=["Health"])

@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     AZURE_OPENAI_API_KEY: str = ""
     AZURE_OPENAI_DEPLOYMENT: str = "gpt-4o"
 
+    # GitHub PR webhook integration
+    GITHUB_WEBHOOK_SECRET: str = ""
+    GITHUB_TOKEN: str = ""
+
     LOG_LEVEL: str = "DEBUG"
     ENVIRONMENT: str = "production"
 
