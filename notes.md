@@ -2,3 +2,4 @@
 - comment clarification @ 2026-05-21T12:00:49+05:30
 - improve error handling @ 2026-06-08T20:46:46+05:30
 - cleanup unused imports @ 2026-06-27T11:07:47+05:30
+- bump version @ 2026-08-17T17:53:31+05:30
