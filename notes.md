@@ -4,3 +4,4 @@
 - cleanup unused imports @ 2026-06-27T11:07:47+05:30
 - bump version @ 2026-08-17T17:53:31+05:30
 - optimize query @ 2026-09-10T16:43:45+05:30
+- handle null input @ 2026-09-16T16:18:00+05:30
