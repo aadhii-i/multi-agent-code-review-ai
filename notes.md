@@ -5,3 +5,4 @@
 - bump version @ 2026-08-17T17:53:31+05:30
 - optimize query @ 2026-09-10T16:43:45+05:30
 - handle null input @ 2026-09-16T16:18:00+05:30
+- minor style fixes @ 2026-10-17T16:30:13+05:30
